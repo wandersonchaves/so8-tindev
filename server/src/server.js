@@ -20,6 +20,7 @@ mongoose.connect(
   "mongodb+srv://root:toor@cluster0.taqtjcc.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   }
 );
 
