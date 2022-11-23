@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
 });
 
 mongoose.connect(
-  "mongodb+srv://root:toor@cluster0.taqtjcc.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://so8-tindev:so8tindev@cluster0.taqtjcc.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
