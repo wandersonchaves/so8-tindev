@@ -1,17 +1,18 @@
+import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import React, {useEffect, useState} from 'react';
 import {
-  Image,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   Text,
+  StyleSheet,
+  Image,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 
-import logo from '../../assets/logo.png';
 import api from '../../services/api';
+
+import logo from '../../assets/logo.png';
 
 export function Login({navigation}) {
   const [user, setUser] = useState('');
@@ -25,20 +26,13 @@ export function Login({navigation}) {
   }, []);
 
   async function handleLogin() {
-    try {
-      const response = await api.post('/devs', {username: user});
+    const response = await api.post('/devs', {username: user});
 
-      const {_id} = response.data;
+    const {_id} = response.data;
 
-      await AsyncStorage.setItem('user', _id);
+    await AsyncStorage.setItem('user', _id);
 
-      navigation.navigate('Main', {_id});
-      return response;
-    } catch (error) {
-      console.log('====================================');
-      console.log(error);
-      console.log('====================================');
-    }
+    navigation.navigate('Main', {user: _id});
   }
 
   return (
@@ -51,7 +45,7 @@ export function Login({navigation}) {
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
-        placeholder="Digite seu usuário do Github"
+        placeholder="Digite seu usuário no Github"
         placeholderTextColor="#999"
         style={styles.input}
         value={user}
@@ -77,7 +71,7 @@ const styles = StyleSheet.create({
   input: {
     height: 46,
     alignSelf: 'stretch',
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 4,
@@ -88,7 +82,7 @@ const styles = StyleSheet.create({
   button: {
     height: 46,
     alignSelf: 'stretch',
-    backgroundColor: '#df4723',
+    backgroundColor: '#DF4723',
     borderRadius: 4,
     marginTop: 10,
     justifyContent: 'center',
@@ -96,7 +90,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    color: '#fff',
+    color: '#FFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
